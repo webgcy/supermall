@@ -51,6 +51,7 @@ import BackTop from "components/content/backTop/BackTop";
 import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail'
 import {debounce} from 'common/utils'
 import {itemListenerMixin} from 'common/mixin'
+import {mapActions} from 'vuex'
 
 export default {  
   name: 'Detail',
@@ -86,7 +87,8 @@ export default {
       commentInfo: {},
       recommends: [],
       currentIndex:0,
-      isShowBackTop: false
+      isShowBackTop: false,
+
     }
   },
   created() {
@@ -118,6 +120,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['addCart']),
     imageLoad() {
       if(this.$refs.scroll) {
         this.$refs.scroll.refresh();
@@ -170,7 +173,16 @@ export default {
       product.iid = this.iid;
       // 添加到购物车
       // this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+      //mapActions映射
+      this.addCart(product).then(res => {
+        this.$toast.show(res, {
+          position: 'top',
+          duration: 1000
+        })
+      })
+      // this.$store.dispatch('addCart', product).then(res => {
+      //   console.log(res);
+      // })
     }
   }
 }
