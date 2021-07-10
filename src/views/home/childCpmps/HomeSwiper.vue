@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     swiperImgLoad() {
-      //设置一个数据保存状态，使加载事件只进来一次
+     //图片加载回调
       if(this.imgLoad){
         this.$emit('swiperImgLoad');
         this.imgLoad = null

@@ -44,7 +44,7 @@
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     
-    <!-- 回到开头-->
+    <!-- 回到顶部-->
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
@@ -114,10 +114,9 @@ export default {
   },
 
   created() {
-    // created一般只存主要行为
-    //1、请求轮播图和推荐位数据
+    //请求轮播图和推荐位数据
     this.getHomeMultidata();
-    //2、请求商品数据
+    //请求商品数据
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
@@ -148,7 +147,6 @@ export default {
     /**轮播图和推荐位数据 */
     getHomeMultidata() {
       getHomeMultidata().then((res) => {
-        // console.log(res);
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
       });
@@ -157,12 +155,11 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then((res) => {
-        // console.log(res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
       });
     },
-    /*回到最上top-back */
+    /*top-back */
     backClick() {
       this.$refs.scroll.scrollTo(0, 0); //(x,y,time)
     },
@@ -178,8 +175,6 @@ export default {
       this.getHomeGoods(this.currentType);
       this.$refs.scroll.finishPullUp();
       this.$refs.scroll.refresh()
-      // /**去除bscroll的图片滑动卡在半途的bug，刷新 。这步多此一举了，因为加入防抖处理，图片加载即刷新*/
-      // this.$refs.scroll.scroll.refresh()
     },
   },
 };
@@ -187,8 +182,6 @@ export default {
 
 <style scoped>
 #home {
-  /* padding-top:44px ;   navbar固定定位脱离文档流，所以整个home会顶上去，需要padding-top隔开 */
-  /**此方案搁置，因为scroll组件用了绝对定位且top：44px */
   /* padding-bottom: 1000px;         /*暂时隔开底部。*/
   height: 100vh;
 }

@@ -3,7 +3,7 @@
     <!-- 子组件navbar -->
     <detail-nav-bar class="detail-nav" @titleClick='titleClick' ref="detailnav"></detail-nav-bar>
 
-    <!-- 滚动组件scroll管理 -->
+    <!-- 滚动scroll -->
     <scroll 
       class="detail-content" 
       ref="scroll"
@@ -161,7 +161,7 @@ export default {
       }
     },
     backClick() {
-      this.$refs.scroll.scrollTo(0, 0); //(x,y,time)
+      this.$refs.scroll.scrollTo(0, 0); 
     },
     addToCart() {
       // 获取商品信息
@@ -172,7 +172,6 @@ export default {
       product.price = this.goods.realPrice;
       product.iid = this.iid;
       // 添加到购物车
-      // this.$store.commit('addCart', product)
       //mapActions映射
       this.addCart(product).then(res => {
         this.$toast.show(res, {
@@ -180,9 +179,6 @@ export default {
           duration: 1000
         })
       })
-      // this.$store.dispatch('addCart', product).then(res => {
-      //   console.log(res);
-      // })
     }
   }
 }

@@ -6,7 +6,7 @@ const Cart = () => import('@/views/cart/Cart')
 const Profile = () => import('@/views/profile/Profile')
 const Detail = () => import('@/views/detail/Detail')
 
-//2、抽离routes路径
+//routes路径
 const routes = [
   {
     path: '',
@@ -38,7 +38,7 @@ const routes = [
   }
 ]
 
-//1、vue3中创建实例
+//vue3中创建实例
 const router = createRouter({
   history : createWebHistory(),
   routes
